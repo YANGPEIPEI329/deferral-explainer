@@ -48,6 +48,7 @@ def expit(z):
 def load(name):
     d = ROOT / name
     meta = json.load(open(d / "meta.json"))
+    meta["nice"] = [n[:1].upper() + n[1:] for n in meta["nice"]]
     z = np.load(d / "data.npz")
     data = {k: z[k] for k in z.files}
     booster = lgb.Booster(model_file=str(d / "model.txt"))
